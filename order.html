@@ -7,7 +7,7 @@
 <style>
   body { font-family: Arial, sans-serif; max-width: 500px; margin: 40px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); }
   label { display: block; margin-top: 15px; font-weight: bold; }
-  input[type="text"], input[type="email"], select { width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; }
+  input[type="text"], select { width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; }
   .checkbox-group { margin-top: 5px; }
   button { margin-top: 25px; padding: 12px; font-size: 16px; font-weight: bold; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
   button:hover { background-color: #45a049; }
@@ -20,9 +20,6 @@
 <form id="order-form" action="https://script.google.com/macros/s/AKfycbxVnYalaJOZzRDyqhjXLQsWmvVIvUv_RhZxuJ7C8cGmwIVBiNLuHsTwz-JlanEZJGVzrQ/exec" method="POST">
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" required>
-
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required>
 
   <label for="main">Main Course:</label>
   <select id="main" name="main" required>
