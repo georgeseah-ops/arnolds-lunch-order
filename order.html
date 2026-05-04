@@ -11,13 +11,13 @@
   .checkbox-group { margin-top: 5px; }
   button { margin-top: 25px; padding: 12px; font-size: 16px; font-weight: bold; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
   button:hover { background-color: #45a049; }
-  #status { margin-top: 15px; font-weight: bold; text-align: center; }
 </style>
 </head>
 <body>
 
 <h2 style="text-align: center;">Place Your Arnold's Order 🍗</h2>
-<form id="order-form">
+
+<form id="order-form" action="https://script.google.com/a/macros/menlosecurity.com/s/AKfycbzZcRX42B5kFcoKJB22OhdfusVi1B54_wJivinH-JZwdwfuMDy17QQY2QCObVSUohxtZA/exec" method="POST">
   <label for="name">Name:</label>
   <input type="text" id="name" name="name" required>
 
@@ -51,33 +51,7 @@
   </select>
 
   <button type="submit">Submit Order</button>
-  <div id="status"></div>
 </form>
-
-<script>
-  // MUST REPLACE: Paste your Google Apps Script Web App URL below between the quotes
-  const scriptURL = 'https://script.google.com/a/macros/menlosecurity.com/s/AKfycbzZcRX42B5kFcoKJB22OhdfusVi1B54_wJivinH-JZwdwfuMDy17QQY2QCObVSUohxtZA/exec';
-  const form = document.getElementById('order-form');
-  const statusDiv = document.getElementById('status');
-
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    statusDiv.textContent = "Sending your order to the kitchen...";
-    statusDiv.style.color = "blue";
-
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => {
-        statusDiv.textContent = "Order locked in! 🎉 Check the Google Sheet.";
-        statusDiv.style.color = "green";
-        form.reset();
-      })
-      .catch(error => {
-        statusDiv.textContent = "Error submitting order. Please try again.";
-        statusDiv.style.color = "red";
-        console.error('Error!', error.message);
-      });
-  });
-</script>
 
 </body>
 </html>
