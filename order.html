@@ -5,11 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arnold's Order Form</title>
 <style>
-  body { font-family: Arial, sans-serif; max-width: 500px; margin: 40px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); }
-  label { display: block; margin-top: 15px; font-weight: bold; }
-  input[type="text"], select { width: 100%; padding: 10px; margin-top: 5px; box-sizing: border-box; }
-  .checkbox-group { margin-top: 5px; }
-  button { margin-top: 25px; padding: 12px; font-size: 16px; font-weight: bold; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); }
+  label.section-title { display: block; margin-top: 20px; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
+  input[type="text"], select { width: 100%; padding: 10px; margin-top: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;}
+  
+  /* Grid layout for the large amount of sides */
+  .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .checkbox-item { display: flex; align-items: center; }
+  .checkbox-item input { margin-right: 8px; }
+  .checkbox-item label { font-weight: normal; margin: 0; }
+  
+  button { margin-top: 30px; padding: 12px; font-size: 16px; font-weight: bold; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
   button:hover { background-color: #45a049; }
 </style>
 </head>
@@ -17,34 +23,62 @@
 
 <h2 style="text-align: center;">Place Your Arnold's Order 🍗</h2>
 
-<form id="order-form" action="https://script.google.com/macros/s/AKfycbxVnYalaJOZzRDyqhjXLQsWmvVIvUv_RhZxuJ7C8cGmwIVBiNLuHsTwz-JlanEZJGVzrQ/exec" method="POST">
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" required>
+<form id="order-form" action="YOUR_NEW_WEB_APP_URL_HERE" method="POST">
+  
+  <label class="section-title" for="name">Your Details</label>
+  <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
-  <label for="main">Main Course:</label>
+  <label class="section-title" for="main">Main Course</label>
   <select id="main" name="main" required>
     <option value="" disabled selected>Select a main</option>
-    <option value="1 Person Value Meal (2pc)">1 Person Value Meal (2pc)</option>
-    <option value="1/2 Spring Plate">1/2 Spring Plate</option>
-    <option value="Whole Spring Plate">Whole Spring Plate</option>
-    <option value="Fish & Chips">Fish & Chips</option>
+    
+    <optgroup label="Ala-Carte">
+      <option value="1 Person Value Meal">1 Person Value Meal</option>
+      <option value="1/2 Spring Plate">1/2 Spring Plate</option>
+      <option value="Whole Spring Plate">Whole Spring Plate</option>
+      <option value="Fish & Chips">Fish & Chips</option>
+      <option value="Chicken Piece (1 pc)">Chicken Piece (1 pc)</option>
+    </optgroup>
+
+    <optgroup label="For Sharing">
+      <option value="Variety Feast (5 Pax)">Variety Feast (5 Pax)</option>
+      <option value="10 Piece Chicken Chest">10 Piece Chicken Chest</option>
+      <option value="Fish & Chicks">Fish & Chicks</option>
+    </optgroup>
   </select>
 
-  <label>Sides (Optional - Select multiple):</label>
+  <label class="section-title">Side Orders (Optional - Select multiple)</label>
   <div class="checkbox-group">
-    <input type="checkbox" id="side1" name="sides" value="Coleslaw"> <label for="side1" style="display:inline; font-weight:normal;">Coleslaw</label><br>
-    <input type="checkbox" id="side2" name="sides" value="Mashed Potato"> <label for="side2" style="display:inline; font-weight:normal;">Mashed Potato</label><br>
-    <input type="checkbox" id="side3" name="sides" value="Potato Fries"> <label for="side3" style="display:inline; font-weight:normal;">Potato Fries</label><br>
-    <input type="checkbox" id="side4" name="sides" value="Fried Bun"> <label for="side4" style="display:inline; font-weight:normal;">Fried Bun</label>
+    <div class="checkbox-item"><input type="checkbox" id="side1" name="sides" value="Coleslaw"> <label for="side1">Coleslaw</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side2" name="sides" value="Mashed Potato"> <label for="side2">Mashed Potato</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side3" name="sides" value="Potato Fries"> <label for="side3">Potato Fries</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side4" name="sides" value="Fried Bun"> <label for="side4">Fried Bun</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side5" name="sides" value="Criss-Cut Fries"> <label for="side5">Criss-Cut Fries</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side6" name="sides" value="Spiral Fries"> <label for="side6">Spiral Fries</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side7" name="sides" value="Onion Rings"> <label for="side7">Onion Rings</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side8" name="sides" value="Cheese Sticks"> <label for="side8">Cheese Sticks</label></div>
+    
+    <div class="checkbox-item"><input type="checkbox" id="side9" name="sides" value="Chicken Tenders"> <label for="side9">Chicken Tenders</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side10" name="sides" value="Chicken Popcorn"> <label for="side10">Chicken Popcorn</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side11" name="sides" value="Chicken Karaage"> <label for="side11">Chicken Karaage</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side12" name="sides" value="Crunchy Squid"> <label for="side12">Crunchy Squid</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side13" name="sides" value="Pollock Fish Finger"> <label for="side13">Pollock Fish Finger</label></div>
+    
+    <div class="checkbox-item"><input type="checkbox" id="side14" name="sides" value="Crispy Treats"> <label for="side14">Crispy Treats</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side15" name="sides" value="Potato Platter"> <label for="side15">Potato Platter</label></div>
+    <div class="checkbox-item"><input type="checkbox" id="side16" name="sides" value="Seafood Bites"> <label for="side16">Seafood Bites</label></div>
   </div>
 
-  <label for="drink">Drink:</label>
+  <label class="section-title" for="drink">Beverage</label>
   <select id="drink" name="drink">
     <option value="None">None</option>
     <option value="Bandung">Bandung</option>
     <option value="Iced Milo">Iced Milo</option>
     <option value="Sjora Mango Peach">Sjora Mango Peach</option>
     <option value="Iced Lemon Tea">Iced Lemon Tea</option>
+    <option value="Coke / Coke Zero">Coke / Coke Zero</option>
+    <option value="Sprite">Sprite</option>
+    <option value="Bottled Water">Bottled Water</option>
   </select>
 
   <button type="submit">Submit Order</button>
