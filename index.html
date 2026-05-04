@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunch Order - May 6, 2026</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; margin-top: 15%; background-color: #f9f9f9; }
+  #question-container { display: none; }
+  .btn { padding: 15px 30px; font-size: 20px; font-weight: bold; margin: 10px; cursor: pointer; border: none; border-radius: 5px;}
+  #btn-yes { background-color: #4CAF50; color: white; }
+  #btn-no { background-color: #f44336; color: white; position: relative; transition: top 0.1s, left 0.1s; }
+  input[type="password"] { padding: 10px; font-size: 16px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+
+<div id="login-container">
+  <h2>Enter Password to Access</h2>
+  <input type="password" id="password" placeholder="Password">
+  <br>
+  <button class="btn" style="background-color: #008CBA;" onclick="checkPassword()">Enter</button>
+  <p id="error-msg" style="color:red; display:none;">Incorrect Password</p>
+</div>
+
+<div id="question-container">
+  <h2>Are you going to have Arnold's fried chicken for lunch on 06 May 2026?</h2>
+  <button class="btn" id="btn-yes" onclick="window.location.href='order.html'">YES</button>
+  <button class="btn" id="btn-no" onmouseover="evade()">NO</button>
+</div>
+
+<script>
+  function checkPassword() {
+    // Set your password here
+    if (document.getElementById('password').value === 'arnolds2026') {
+      document.getElementById('login-container').style.display = 'none';
+      document.getElementById('question-container').style.display = 'block';
+    } else {
+      document.getElementById('error-msg').style.display = 'block';
+    }
+  }
+
+  function evade() {
+    const btn = document.getElementById('btn-no');
+    // Changes position to absolute and randomly moves it around the viewport
+    btn.style.position = 'absolute';
+    btn.style.top = Math.random() * 80 + 10 + '%';
+    btn.style.left = Math.random() * 80 + 10 + '%';
+  }
+</script>
+</body>
+</html>
