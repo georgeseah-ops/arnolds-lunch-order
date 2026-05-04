@@ -9,29 +9,39 @@
   label.section-title { display: block; margin-top: 20px; font-weight: bold; font-size: 1.1em; border-bottom: 1px solid #ccc; padding-bottom: 5px; }
   input[type="text"], select { width: 100%; padding: 10px; margin-top: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;}
   
-  /* Grid layout for the large amount of sides */
+  /* Layout for the name field + randomize button */
+  .name-row { display: flex; gap: 10px; align-items: center; margin-top: 8px; }
+  .btn-random { padding: 10px; background-color: #ff9800; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; flex-shrink: 0; }
+  .btn-random:hover { background-color: #e68a00; }
+  .silly-name-display { margin-top: 5px; font-size: 0.9em; color: #555; font-style: italic; }
+
   .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
   .checkbox-item { display: flex; align-items: center; }
   .checkbox-item input { margin-right: 8px; }
   .checkbox-item label { font-weight: normal; margin: 0; }
   
-  button { margin-top: 30px; padding: 12px; font-size: 16px; font-weight: bold; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
-  button:hover { background-color: #45a049; }
+  .btn-submit { margin-top: 30px; padding: 12px; font-size: 16px; font-weight: bold; width: 100%; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; }
+  .btn-submit:hover { background-color: #45a049; }
 </style>
 </head>
 <body>
 
 <h2 style="text-align: center;">Place Your Arnold's Order 🍗</h2>
 
-<form id="order-form" action="https://script.google.com/macros/s/AKfycbxVnYalaJOZzRDyqhjXLQsWmvVIvUv_RhZxuJ7C8cGmwIVBiNLuHsTwz-JlanEZJGVzrQ/exec" method="POST">
+<form id="order-form" action="YOUR_NEW_WEB_APP_URL_HERE" method="POST">
   
-  <label class="section-title" for="name">Your Details</label>
-  <input type="text" id="name" name="name" placeholder="Enter your name" required>
+  <label class="section-title">Your Details</label>
+  <div class="name-row">
+    <input type="text" id="base-name" placeholder="Enter your name" required oninput="updateName()">
+    <button type="button" class="btn-random" onclick="randomizeTitle()">🎲 Randomize Title</button>
+  </div>
+  <div class="silly-name-display">Official ordering name: <strong id="display-name" style="color: #d32f2f;"></strong></div>
+  
+  <input type="hidden" id="name" name="name" required>
 
   <label class="section-title" for="main">Main Course</label>
   <select id="main" name="main" required>
     <option value="" disabled selected>Select a main</option>
-    
     <optgroup label="Ala-Carte">
       <option value="1 Person Value Meal">1 Person Value Meal</option>
       <option value="1/2 Spring Plate">1/2 Spring Plate</option>
@@ -39,7 +49,6 @@
       <option value="Fish & Chips">Fish & Chips</option>
       <option value="Chicken Piece (1 pc)">Chicken Piece (1 pc)</option>
     </optgroup>
-
     <optgroup label="For Sharing">
       <option value="Variety Feast (5 Pax)">Variety Feast (5 Pax)</option>
       <option value="10 Piece Chicken Chest">10 Piece Chicken Chest</option>
@@ -47,7 +56,7 @@
     </optgroup>
   </select>
 
-  <label class="section-title">Side Orders (Optional - Select multiple)</label>
+  <label class="section-title">Side Orders (Optional)</label>
   <div class="checkbox-group">
     <div class="checkbox-item"><input type="checkbox" id="side1" name="sides" value="Coleslaw"> <label for="side1">Coleslaw</label></div>
     <div class="checkbox-item"><input type="checkbox" id="side2" name="sides" value="Mashed Potato"> <label for="side2">Mashed Potato</label></div>
@@ -57,13 +66,11 @@
     <div class="checkbox-item"><input type="checkbox" id="side6" name="sides" value="Spiral Fries"> <label for="side6">Spiral Fries</label></div>
     <div class="checkbox-item"><input type="checkbox" id="side7" name="sides" value="Onion Rings"> <label for="side7">Onion Rings</label></div>
     <div class="checkbox-item"><input type="checkbox" id="side8" name="sides" value="Cheese Sticks"> <label for="side8">Cheese Sticks</label></div>
-    
     <div class="checkbox-item"><input type="checkbox" id="side9" name="sides" value="Chicken Tenders"> <label for="side9">Chicken Tenders</label></div>
     <div class="checkbox-item"><input type="checkbox" id="side10" name="sides" value="Chicken Popcorn"> <label for="side10">Chicken Popcorn</label></div>
     <div class="checkbox-item"><input type="checkbox" id="side11" name="sides" value="Chicken Karaage"> <label for="side11">Chicken Karaage</label></div>
     <div class="checkbox-item"><input type="checkbox" id="side12" name="sides" value="Crunchy Squid"> <label for="side12">Crunchy Squid</label></div>
     <div class="checkbox-item"><input type="checkbox" id="side13" name="sides" value="Pollock Fish Finger"> <label for="side13">Pollock Fish Finger</label></div>
-    
     <div class="checkbox-item"><input type="checkbox" id="side14" name="sides" value="Crispy Treats"> <label for="side14">Crispy Treats</label></div>
     <div class="checkbox-item"><input type="checkbox" id="side15" name="sides" value="Potato Platter"> <label for="side15">Potato Platter</label></div>
     <div class="checkbox-item"><input type="checkbox" id="side16" name="sides" value="Seafood Bites"> <label for="side16">Seafood Bites</label></div>
@@ -81,8 +88,41 @@
     <option value="Bottled Water">Bottled Water</option>
   </select>
 
-  <button type="submit">Submit Order</button>
+  <button type="submit" class="btn-submit">Submit Order</button>
 </form>
+
+<script>
+  // The array of foolish titles
+  const titles = [
+    "-the-precious-princess", 
+    "-the-chicken-destroyer", 
+    "-the-sauce-boss", 
+    "-the-hungry-hippo", 
+    "-mc-chicken-face", 
+    "-who-never-shares-fries", 
+    "-the-greasy-fingered", 
+    "-the-legendary-eater"
+  ];
+  
+  // Pick a random title to start with
+  let currentTitle = titles[Math.floor(Math.random() * titles.length)];
+
+  function randomizeTitle() {
+    currentTitle = titles[Math.floor(Math.random() * titles.length)];
+    updateName();
+  }
+
+  function updateName() {
+    const baseName = document.getElementById('base-name').value.trim();
+    const fullName = baseName ? baseName + currentTitle : "";
+    
+    // Updates the visual text on the screen
+    document.getElementById('display-name').textContent = fullName;
+    
+    // Updates the hidden input field that gets sent to Google Sheets
+    document.getElementById('name').value = fullName;
+  }
+</script>
 
 </body>
 </html>
