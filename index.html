@@ -32,7 +32,7 @@
   </p>
 
   <button class="btn" id="btn-yes" onclick="window.location.href='order.html'">YES</button>
-  <button class="btn" id="btn-no" onmouseover="evade()">NO</button>
+  <button class="btn" id="btn-no" onmouseover="evade(event)" ontouchstart="evade(event)">NO</button>
 </div>
 
 <script>
@@ -47,6 +47,18 @@
   }
 
   function evade() {
+    const btn = document.getElementById('btn-no');
+    // Changes position to absolute and randomly moves it around the viewport
+    btn.style.position = 'absolute';
+    btn.style.top = Math.random() * 80 + 10 + '%';
+    btn.style.left = Math.random() * 80 + 10 + '%';
+  }
+  function evade(e) {
+    // This stops the mobile tap from actually registering as a click!
+    if (e) {
+      e.preventDefault(); 
+    }
+    
     const btn = document.getElementById('btn-no');
     // Changes position to absolute and randomly moves it around the viewport
     btn.style.position = 'absolute';
