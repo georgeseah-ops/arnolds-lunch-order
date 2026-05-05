@@ -11,6 +11,7 @@
   #btn-yes { background-color: #4CAF50; color: white; }
   #btn-no { background-color: #f44336; color: white; position: relative; transition: top 0.1s, left 0.1s; }
   input[type="password"] { padding: 10px; font-size: 16px; margin-bottom: 10px; }
+  .bait-text { color: #d32f2f; font-weight: bold; font-style: italic; margin-bottom: 25px; font-size: 1.1em; }
 </style>
 </head>
 <body>
@@ -25,6 +26,11 @@
 
 <div id="question-container">
   <h2>Are you going to have Arnold's fried chicken for lunch on 06 May 2026?</h2>
+  
+  <p class="bait-text">
+    *Note: For those who select "NO", you will be entitled to reimburse $50 for lunch instead.
+  </p>
+
   <button class="btn" id="btn-yes" onclick="window.location.href='order.html'">YES</button>
   <button class="btn" id="btn-no" onmouseover="evade()">NO</button>
 </div>
