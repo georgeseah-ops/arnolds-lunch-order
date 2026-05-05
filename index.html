@@ -18,7 +18,7 @@
 
 <div id="login-container">
   <h2>Enter Password to Access</h2>
-  <input type="password" id="password" placeholder="Password">
+  <input type="password" id="password" placeholder="Password" onkeydown="if(event.key === 'Enter'){ checkPassword(); }">
   <br>
   <button class="btn" style="background-color: #008CBA;" onclick="checkPassword()">Enter</button>
   <p id="error-msg" style="color:red; display:none;">Incorrect Password</p>
